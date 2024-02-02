@@ -61,9 +61,11 @@ app.put('/api/todo/toggle_status/:id', (req, res) => { // Toggle finished status
     todo.map(item => {
         if (item.id == todoId) {
             item.finished = !item.finished;
+            res.status(200).send({ message: `Status of todo with id: ${todoId} is toggled` });
+            return;
         }
     });
-    res.status(200).send({ message: `Status of todo with id: ${todoId} is toggled` });
+    res.status(404).send({ message: 'Invalid Id!' });
 });
 
 app.listen(PORT, () => {
